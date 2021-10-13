@@ -45,6 +45,7 @@ public class ViewAction implements Action {
 		}else {
 			r_list = (ArrayList<BbsVO>)obj;
 		}
+		
 		//System.out.println(cPage +"/"+ b_idx);
 		BbsVO vo = BbsDAO.getBbs(b_idx);
 		
