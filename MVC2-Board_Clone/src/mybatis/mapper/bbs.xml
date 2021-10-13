@@ -68,10 +68,10 @@
 	</select>
 	
 	<!-- 원글 삭제 update -->
-	<update id="delBbs" parameterType="String">
+	<update id="delBbs" parameterType="Map">
 		UPDATE bbs_t
 		SET status = 1
-		WHERE b_idx = ${no}
+		WHERE b_idx = #{b_idx} AND pwd = #{pwd}
 	</update>
 	
 	<!-- 조회수 증가 -->

@@ -1,4 +1,4 @@
-package bbs.action;
+package cbbs.action;
 
 import java.io.IOException;
 
@@ -23,7 +23,7 @@ public class WriteAction implements Action{
 		
 		String realPath = context.getRealPath("/bbs_upload");
 		
-		String c_type = request.getContentType();
+		String c_type = request.getContentType(); // enctype : multipart 인지 아닌지 구별하는 변수 & 메소드 선언
 			
 		if(c_type != null && c_type.startsWith("multipart")) {
 			

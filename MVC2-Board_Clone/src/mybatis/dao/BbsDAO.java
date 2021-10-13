@@ -82,9 +82,12 @@ public class BbsDAO {
 		return cnt;
 	}
 	
-	public static int delBbs(String b_idx) {
+	public static int delBbs(String b_idx, String pwd) {
 		SqlSession ss = FactoryService.getFactory().openSession();
-		int cnt = ss.update("bbs.delBbs", b_idx);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("b_idx", b_idx);
+		map.put("pwd", pwd);
+		int cnt = ss.update("bbs.delBbs",map);
 		
 		if(cnt > 0)
 			ss.commit();

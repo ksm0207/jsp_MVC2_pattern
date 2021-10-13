@@ -1,4 +1,4 @@
-package bbs.action;
+package cbbs.action;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bbs.action.Action;
+import cbbs.action.Action;
 
 /**
  * Servlet implementation class Controller
@@ -55,7 +55,7 @@ public class Controller extends HttpServlet {
 			fis = new FileInputStream(realPath);
 			
 			props.load(fis);
-		
+			System.out.println("파일내용 : " + props);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,13 +94,12 @@ public class Controller extends HttpServlet {
 		if(type == null)
 			type = "list";
 		
-		//type으로 받은 값이 actionMap의 key로 사용되고 있으므로 
-		// 원하는 객체를 얻어낸다.
+		
 		Action action = actionMap.get(type);
 		
 		String viewPath = action.execute(request, response);
 		
-		//viewPath가 null이면 total로 sendRedirect하자!
+		
 		if(viewPath == null) {
 			response.sendRedirect("Controller");
 		} else {

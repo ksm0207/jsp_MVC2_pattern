@@ -12,8 +12,18 @@ public class BbsVO {
 				write_date,
 				ip,
 				hit,
-				status;
+				status,
+				pwd;
 	private List<CommVO> c_list;//해당 글의 댓글들이 저장되는 곳!
+	
+	public String getPwd() {
+		return pwd;
+	}
+	
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+	
 	public String getB_idx() {
 		return b_idx;
 	}

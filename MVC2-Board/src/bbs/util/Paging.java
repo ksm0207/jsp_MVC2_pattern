@@ -27,16 +27,14 @@ public class Paging {
 		this.nowPage = nowPage;
 		//현재 페이지 값이 바뀌면 표현할 게시물들이 변경되어야 한다.
 		//즉, begin과 end값이 변경되어야 한다.
-		
+		System.out.println("SetNowPage () 호출 !");
 		//현재 페이지 값은 총 페이지 값을 넘으면 안된다.
 		if(nowPage > totalPage)
 			  nowPage = totalPage;
 		
 		//각 페이지의 시작과 끝(begin, end)를 지정하자!
 		//   현재페이지가 1: begin:1, end:5
-		//   현재페이지가 2: begin:6, end:10
-		//   현재페이지가 3: begin:11, end:15
-		//   현재페이지가 4: begin:16, end:20
+	
 		begin = (nowPage-1)*numPerPage+1;
 	  	end = nowPage*numPerPage;
 	  	

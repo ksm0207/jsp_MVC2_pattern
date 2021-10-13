@@ -35,68 +35,75 @@
 	if(obj != null){
 		
 		pvo = (Paging)obj;
-  	
-  		if(pvo.getStartPage() < pvo.getPagePerBlock()){
+  		//  1 < 5
+  		if(pvo.getStartPage() < pvo.getPerBlock()){
 %>
-	<li class="disable">&lt;</li>
+	<!-- 조건 true -->
+	<li class="disable">이전</li>
 <%
 		}else{
-%>
-	<li><a href="Controller?type=list&cPage=<%=pvo.getStartPage()-pvo.getPagePerBlock()%>">&lt;</a></li>
+%>			  <!-- else getStartPage : 6 < 5   : nowPage -->
+	<li><a href="Controller?type=list&cPage=<%=pvo.getStartPage()-pvo.getPerBlock()%>">처음으로</a></li>
 <%
 		}//if문의 끝
   
-  for(int i=pvo.getStartPage(); i<=pvo.getEndPage(); i++){
-	  
+  		// i = 1 i< 5 i ++
+  	for(int i=pvo.getStartPage(); i<=pvo.getEndPage(); i++){
+	  // nowPage == 1
 	  if(pvo.getNowPage() == i){
-		  System.out.println(i);
+		  System.out.println(true);
 %>
-		<li class="now"><%=i%> </li>
+		<!--  text  -->
+		<li class="now"><%=i%></li>
 <%
 		}else{
-%>
-		<li><a href="Controller?type=list&cPage=<%=i%>"><%=i %> </a></li>
+			System.out.println(false);
+%>		<!-- 현재 페이지 외 나머지 블록들 -->
+		<li><a href="Controller?type=list&cPage=<%=i%>"><%=i %></a></li>
 <%
-}//if문의 끝
-  }//for의 끝
+		}//if문의 끝
+  	  }//for의 끝
+  
+  //다음 블록으로 이동하는 기능을 부여해야 할지? 하지 말아야 할지?를
+  //endPage가 totalPage보다 작을 경우에만 부여하자!
+       // 마지막페이지 5 <  총 페이지 6
+  	if(pvo.getEndPage() < pvo.getTotalPage()){
+%>
+											<!-- 1 + 5 -->
+	<li><a href="Controller?type=list&cPage=<%=pvo.getStartPage()+pvo.getPerBlock()%>">마지막</a></li>
+<%
+  	}
+%>
 
-  if(pvo.getEndPage() < pvo.getTotalPage()){
-%>
-	<li><a href="Controller?type=list&cPage=<%=pvo.getStartPage()+pvo.getPagePerBlock()%>">&gt;</a></li>
 <%
-}else{
+	}
 %>
-	<li class="disable">&gt;</li>
-<%
-}
-%> 
+
+
+	
                               </ol>
                           </td>
 						  <td>
 							<input type="button" value="글쓰기"
 			onclick="javascript:location.href='Controller?type=write'"/>
-			
 						  </td>
                       </tr>
                   </tfoot>
 			<tbody>
 <%
 // 게시물 목록 가져온다.
-	
-	Object o = request.getAttribute("ar");
-	
-	if(o != null){
-		BbsVO[] ar = (BbsVO[])o;
-		for(int i=0; i<ar.length; i++){
-		BbsVO vo = ar[i];
+	Object obj2 = request.getAttribute("list");
+	if(obj2 != null){
+		BbsVO[] ar = (BbsVO[])obj2;
+		
+			for(int i=0; i<ar.length; i++){
+				BbsVO vo = ar[i];//배열에서 하나의 요소를  가져온다.
 %>			
 				<tr>
 					<td><%=vo.getB_idx() %></td>
 					<td style="text-align: left">
-					<%--
-		
-					 --%>
-						<a href="view.jsp?cPage=<%=pvo.getNowPage()%>&b_idx=<%=vo.getB_idx()%>">
+			
+						<a href="Controller?type=view&cPage=<%=pvo.getNowPage()%>&b_idx=<%=vo.getB_idx()%>">
 							<%=vo.getSubject() %>
 							<%
 								if(vo.getC_list() != null && vo.getC_list().size() > 0){
@@ -122,11 +129,6 @@
 <%
 		}//for문의 끝
 	}//if문의 끝
-	
-%>
-
-<%
-	}
 %>
 			</tbody>
 		</table>

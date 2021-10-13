@@ -105,7 +105,7 @@ public class Controller extends HttpServlet {
 		
 		// type이라는 파라미터 값 받기
 		String type = request.getParameter("type");
-		
+		System.out.println(type);
 		// type이 null이면 기본객체를 인식할 수 있도록 "greet"을 넣는다.
 		if(type == null)
 			type = "list";

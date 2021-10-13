@@ -1,7 +1,3 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="mybatis.vo.CommVO"%>
-<%@page import="java.util.List"%>
-<%@page import="mybatis.dao.BbsDAO"%>
 <%@page import="mybatis.vo.BbsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -11,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	#bbs table {
+#bbs table {
 	    width:580px;
 	    margin-left:10px;
 	    border:1px solid black;
@@ -48,33 +44,24 @@
 	.odd {background:silver}
 	
 	.hide{ display: none; }	
+
+
 </style>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-
 </head>
+
 <body>
-<%!List<BbsVO> r_list;//멤버변수
+	<%
 	
-	public boolean checkBbs(BbsVO vo){
-		boolean value = true;
-		
-		for(BbsVO bvo : r_list){
-			if(bvo.getB_idx().equals(vo.getB_idx())){
-				value = false;
-				break;
-			}
-		}
-		
-		return value;
-	}%>
+		Object getcPage = request.getAttribute("cPage");
+		System.out.println("getcPage :" + getcPage);
+		Object getBbs = request.getAttribute("getBbs");
 	
-<%
-	Object obj = request.getAttribute("vo");
-	Object obj2 = request.getAttribute("cPage");
-	if(obj != null){
-		BbsVO vo = (BbsVO)obj;
-		String cPage = (String)obj2;
-%>
+		if(getBbs != null){
+			BbsVO vo = (BbsVO)getBbs;
+			String cPage = (String)getcPage;
+	%>
+
 
 	<div id="bbs">
 	<form method="post" >
@@ -83,8 +70,9 @@
 			<tbody>
 				<tr>
 					<th>제목:</th>
-					<td><%=vo.getSubject() %> </td>
+					<td><%=vo.getSubject() %></td>
 				</tr>
+				
 				<%
 					if(vo.getFile_name() != null && vo.getFile_name().length() > 4){
 				%>
@@ -97,6 +85,7 @@
 				<%
 					}
 				%>
+				
 				<tr>
 					<th>이름:</th>
 					<td><%=vo.getWriter() %></td>
@@ -106,6 +95,7 @@
 					<td><%=vo.getContent() %></td>
 				</tr>
 				
+	
 				<tr>
 					<td colspan="2">
 						<input type="button" value="수정" onclick="edit()"/>
@@ -116,6 +106,7 @@
 				</tr>
 			</tbody>
 		</table>
+		
 	</form>
 	<form method="post" action="ans_write.jsp">
 		이름:<input type="text" name="writer"/><br/>
@@ -131,24 +122,19 @@
 	</form>
 	<p/>
 	댓글들<hr/>
-	<%
-		List<CommVO> c_list = vo.getC_list();
-		for(CommVO cvo : c_list){
-	%>
+	
 		<div>
-			이름:<%=cvo.getWriter() %> &nbsp;&nbsp;
-			날짜:<%=cvo.getWrite_date() %><br/>
-			내용:<%=cvo.getContent() %>
+			이름: &nbsp;&nbsp;
+			날짜:<br/>
+			내용:
 		</div>
 		<hr/>
-	<%
-		}//for문의 끝
-	%>
+
 	
 	</div>
 	
 	<form name="frm" method="post" >
-		<input type="hidden" name="cPage" value="<%=cPage%>">
+		<input type="hidden" name="cPage" value="<%=getcPage%>">
 		<input type="hidden" name="b_idx" value="<%=vo.getB_idx()%>">
 		<input type="hidden" name="f_name" />
 		<input type="hidden" name="type" />
@@ -158,10 +144,10 @@
 	<div id="del_dialog" title="삭제" class="hide">
 		<form action="Controller" method="post">
 			<label for="pwd">비밀번호:</label>
-			<input type="password" id="pwd" name="pwd" size="10"/>
+			<input type="text" id="pwd" name="pwd" value="<%=vo.getPwd()%>" size="10"/>
 			<br/><br/>
 			<input type="hidden" name="type" value="del">
-			<input type="hidden" name="cPage" value="<%=cPage%>">
+			<input type="hidden" name="cPage" value="<%=getcPage%>">
 			<input type="hidden" name="b_idx" value="<%=vo.getB_idx()%>">
 			<input type="button" value="삭제" onclick="delBbs(this.form)"/>
 		</form>
@@ -188,9 +174,10 @@
 		}
 	
 		function goList(){
-		
-			document.frm.action = "Controller";
+			// location.href = Controller?type=list&cPage=1
 			document.frm.type.value = "list";
+			document.frm.action = "Controller";
+			console.log(document.frm.type.value);
 			document.frm.submit();
 		}
 		
@@ -205,18 +192,11 @@
 			document.frm.submit();
 		}
 	</script>
-<%
-	}else
-		response.sendRedirect("list.jsp");
-%>	
 
-	
+	<%
+		}
+			
+	%>
+</body>
 </body>
 </html>
-
-
-
-
-
-
-
