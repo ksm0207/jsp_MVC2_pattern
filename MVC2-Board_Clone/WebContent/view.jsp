@@ -133,9 +133,10 @@
 	
 	</div>
 	
-	<form name="frm" method="post" >
+	<form action="Controller" name="frm" method="post" >
 		<input type="hidden" name="cPage" value="<%=getcPage%>">
 		<input type="hidden" name="b_idx" value="<%=vo.getB_idx()%>">
+		
 		<input type="hidden" name="f_name" />
 		<input type="hidden" name="type" />
 	</form>
@@ -167,9 +168,11 @@
 			}
 			frm.submit(); // 결국 Controller를 거쳐서 DelAction으로 간다.
 		}
+		
 		function edit(){
 			
-			document.frm.action = "edit.jsp";
+			document.frm.type.value = "edit"; // Parameter
+			document.frm.action = "Controller";
 			document.frm.submit();
 		}
 	
