@@ -157,7 +157,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="MVC2-pattern" path="/MVC2-pattern" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-pattern"/><Context docBase="MVC2-Board" path="/MVC2-Board" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-Board"/><Context docBase="MVC2-Board_Clone" path="/MVC2-Board_Clone" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-Board_Clone"/><Context docBase="Page" path="/Page" reloadable="true" source="org.eclipse.jst.jee.server:Page"/></Host>
+      <Context docBase="MVC2-pattern" path="/MVC2-pattern" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-pattern"/><Context docBase="MVC2-Board" path="/MVC2-Board" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-Board"/><Context docBase="MVC2-Board_Clone" path="/MVC2-Board_Clone" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-Board_Clone"/><Context docBase="Page" path="/Page" reloadable="true" source="org.eclipse.jst.jee.server:Page"/><Context docBase="MVC2-1014" path="/MVC2-1014" reloadable="true" source="org.eclipse.jst.jee.server:MVC2-1014"/></Host>
     </Engine>
   </Service>
 </Server>
