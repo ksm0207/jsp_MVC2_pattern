@@ -1,3 +1,4 @@
+<%@page import="mybatis.dao.BbsDAO"%>
 <%@page import="mybatis.vo.BbsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -58,15 +59,15 @@
 <body>
 
 <%
-	Object obj2 = request.getParameter("cPage");
-	Object obj = request.getAttribute("vo");
+	Object obj = request.getAttribute("vo");	
 	if(obj != null){
-	BbsVO bvo = (BbsVO)obj;
-	String cPage = (String)obj2;
+		
+		BbsVO bvo = (BbsVO)obj;
+	
 %>
 <!-- http://localhost:9090/Mvc1_Board/edit.jsp?cPage=1&b_idx=27  -->
 <div id="bbs">
-	<form action="Controller?type=edit&cPage=<%=cPage %>&b_idx=<%=bvo.getB_idx()%>" method="post">
+	<form action="Controller?type=edit" method="post">
 		<table summary="수정">
 			<caption>게시판 수정</caption>
 			<tbody>
@@ -94,21 +95,17 @@
 				
 					
 				</tr>
-				
-<!--
-				<tr>
-					<th>비밀번호:</th>
-					<td><input type="password" name="pwd" size="12"/></td>
-				</tr>
--->
 
+			 	
 				<tr>
 					<td colspan="2">
 						<input type="submit" value="보내기"/>
 						<!--  
 							<input type="button" value="다시"/>
 							<input type="button" value="목록"/>
+							
 						-->
+						<%-- &cPage=<%=cPage %>&b_idx=<%=bvo.getB_idx()%> --%>
 					</td>
 				</tr>
 			</tbody>
