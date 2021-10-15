@@ -1,3 +1,4 @@
+<%@page import="mybatis.vo.CountriesVO"%>
 <%@page import="mybatis.vo.LocationsVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -113,30 +114,39 @@
 		<div id="content">
 			<form action="Controller" method="POST">
 			
-				<label for="emp_id">사번 :</label>
-				<input type="text" id="employee_id" name="employee_id"><br>
+				<label for="s_loc_id">도시코드:</label>
+				<input type="text" id="s_loc_id" name="location_id"/><br/>
 				
-				<label for="emp_fname">이름 :</label>
-				<input type="text" id="first_name" name="first_name"><br>
-			
-				<label for="emp_lname">성씨 :</label>
-				<input type="text" id="last_name" name="last_name"><br>
+				<label for="s_addr">주소:</label>
+				<input type="text" id="s_addr" name="street_address"/><br/>
 				
-				<label for="emp_email">이메일 :</label>
-				<input type="text" id="email" name="email"><br>
+				<label for="s_post">우편번호:</label>
+				<input type="text" id="s_post" name="postal_code"/><br/>
 				
-				<label for="emp_job">직종 :</label>
-				<input type="text" id="job_id" name="job_id" value="IT_PROG"><br>
+				<label for="s_city">도시명:</label>
+				<input type="text" id="s_city" name="city"/><br/>
 				
-				<label for="emp_date">입사 :</label>
-				<input type="text" id="hire_date" name="hire_date"><br>
+				<label for="s_state">주,도:</label>
+				<input type="text" id="s_state" name="state_province" /><br/>
 				
-				<label for="emp_deptno">부서코드 :</label>
-				<input type="text" id="department_id" name="department_id" value="30"><br>
-				
+				<label for="s_country">국적코드:</label>
+				<select id="s_country" name="country_id">
+				<%
+					Object country = request.getAttribute("country_id");
+					if(country != null){
+						CountriesVO[] cvo = (CountriesVO[]) country;
+						for(int i=0; i< cvo.length; i ++){
+							CountriesVO vo = cvo[i];
+				%>
+					<option value="<%=vo.getCountry_id() %>" ><%=vo.getCountry_id()%></option>
+				<%
+						}
+					}
+				%>
+				</select>
 				<input type="button" value="저장" onclick="create()">
 				
-				<input type="hidden" name="search" value="result">
+				<input type="hidden" name="type" value="add">
 			</form>
 		</div>
 	</div>
@@ -185,17 +195,18 @@
 		
 		function create() {
 			
-			let emp_no = $("#employee_id").val();
-			let first_name = $("#first_name").val();
-			let last_name = $("#last_name").val();
-			let email = $("#email").val();
-			let job_id = $("#job_id").val();
-			let hire_date = $("#hire_date").val();
-			let department_id = $("#department_id").val();
+			let s_loc_id = $("#s_loc_id").val();
+			let s_addr = $("#s_addr").val();
+			let s_post = $("#s_post").val();
+			let s_city = $("#s_city").val();
+			let s_state = $("#s_state").val();
+			let s_country = $("#s_country").val();
 			
-			$.ajax({				url : "Controller",
-				data : "search="+"add&employee_id="+emp_no.trim()+"&first_name="+first_name.trim()+"&last_name="+last_name.trim()
-				                                      +"&email="+email.trim()+"&job_id="+job_id.trim()+"&hire_date="+hire_date+"&department_id="+department_id,
+		
+			$.ajax({				
+				url : "Controller",
+				data : "type="+"add&s_loc_id="+s_loc_id.trim()+"&s_addr="+s_addr.trim()+"&s_post="+s_post.trim()
+				                                      +"&s_city="+s_city.trim()+"&s_state="+s_state.trim()+"&s_country="+s_country.trim(),
 				type : "POST"
 			})
 			.done(function(data){

@@ -49,4 +49,31 @@ public class LocationsDAO {
 		
 		return ar_vo;
 	}
+	
+	// 추가기능
+	public static int add(String s_loc_id,String s_addr,String s_post,String s_city,
+			String s_state,String s_country) {
+		
+		SqlSession sql = FactoryService.getFactory().openSession();
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("location_id", s_loc_id);
+		map.put("street_address", s_addr);
+		map.put("postal_code", s_post);
+		map.put("city", s_city);
+		map.put("STATE_PROVINCE", s_state);
+		map.put("COUNTRY_ID", s_country);
+		
+		int insert = sql.insert("locations.add",map);
+		
+		if(insert > 0) {
+			sql.commit();
+		}else {
+			sql.rollback();
+		}
+		sql.close();
+		
+		return insert;
+	}
+	
 }

@@ -57,6 +57,22 @@
 	</select>
 	<!-- end -->
 	
+	<!-- 추가 -->
+	
+	<insert id="add" parameterType="Map">
+		INSERT INTO locations (location_id,street_address,postal_code,city,state_province,country_id)
+                   VALUES(
+	                   #{location_id},
+	                   #{street_address},
+	                   #{postal_code},
+	                   #{city},
+	                   #{STATE_PROVINCE},
+	                   #{COUNTRY_ID}
+                   )
+	</insert>
+	
+	
+	
 </mapper>
 
 
