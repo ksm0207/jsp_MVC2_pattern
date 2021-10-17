@@ -22,7 +22,7 @@
 		<ol>
 			<li>param : 파라미터를 접근할 수 있다 서버로 넘어오는 name값을 참조하자.</li>
 			<li>requestScope :  요청객체에 접근할 떄 사용한다.</li>
-			<li>sessiontScope : HttpSession 접근할 떄 사용한다.</li>
+			<li>sessionScope : HttpSession 접근할 떄 사용한다.</li>
 		</ol>	
 	</h2>
 	

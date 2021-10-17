@@ -13,7 +13,7 @@
 	<h1>param["m_pw"] :  ${param["m_pw"]}</h1>
 	
 	<h1>sessionScope.m_id["m_id"] :  ${sessionScope.m_id}</h1>
-	<h1>m_id = "${m_id}" getAttribute() 대신 사용가능하다. </h1>
+	<h1>m_id = "${m_id}" session 에 저장된건 바로 부를 수 있다 </h1>
 	
 	Object o = request.getAttribute("m_id")
 	if(o != null){

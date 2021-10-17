@@ -19,13 +19,13 @@
 		map.put("m_id", m_id);
 		
 		request.setAttribute("m_map", map);
-		
 		request.setAttribute("u_id", m_id);
+		
 		session.setAttribute("u_id", "Result");
 		
 	%>
-	<jsp:forward page="ex3_res.jsp">
-		<jsp:param name="m_id" value="m_id"/>
-	</jsp:forward>
+	<jsp:forward page="ex3_res.jsp"/>
+		
+	
 </body>
 </html>
